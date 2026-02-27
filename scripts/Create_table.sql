@@ -1,5 +1,5 @@
 'SCOPO: Questa query serve per creare le tabella del layer bronzo. Verranno nominate con FONTE_nome_tabella, così da mantenere la tracciabilità con le fonti originali.
-'È stata inoltre inserita una funzione che permette di verificare se la tabella esiste e, nel caso esistesse, permette di cancellarla e crearne una nuova:'
+È stata inoltre inserita una funzione che permette di verificare se la tabella esiste e, nel caso esistesse, permette di cancellarla e crearne una nuova'
 
 IF OBJECT_ID ('bronze.crm_cust_info' , 'U') IS NOT NULL
 	DROP TABLE bronze.crm_cust_info;
