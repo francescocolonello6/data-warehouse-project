@@ -7,7 +7,7 @@ BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @start_load_bronze DATETIME, @end_load_bronze DATETIME;
 	BEGIN TRY
 		PRINT '===================================================================';
-		PRINT 'Loading Bronzr Layer';
+		PRINT 'Loading Bronze Layer';
 		PRINT '===================================================================';
 
 		PRINT '-------------------------------------------------------------------';
@@ -118,7 +118,7 @@ BEGIN
 		SET @end_load_bronze = GETDATE();
 		PRINT '-------------------------------------------------------------------';
     PRINT ' Il caricamento del layer bronze è concluso';
-		PRINT '>> TOTAL LOAD DURATIION: ' + CAST (DATEDIFF (second, @start_load_bronze, @end_load_bronze) AS NVARCHAR) + 'seconds'
+		PRINT '>> TOTAL LOAD DURATION: ' + CAST (DATEDIFF (second, @start_load_bronze, @end_load_bronze) AS NVARCHAR) + 'seconds'
 
 	END TRY
 	BEGIN CATCH
