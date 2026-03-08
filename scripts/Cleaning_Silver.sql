@@ -1,5 +1,7 @@
 SCOPO : Pulire i dati dalle tabelle bronze e inserirli nel silver
 
+'CRM CUST INFO - INSERIMENTO E PULIZIA DATI'
+	
 INSERT INTO silver.crm_cust_info (
 cst_id,
 cst_key,
@@ -37,7 +39,7 @@ WHERE cst_id IS NOT NULL
 
 select * from silver.crm_cust_info
 
-
+'CRM PRD INFO - INSERIMENTO E PULIZIA DATI'
 INSERT INTO silver.crm_prd_info (
 prd_id,
 cat_id,
@@ -67,3 +69,5 @@ prd_end_dt
 
 select *
 from silver.crm_prd_info
+
+'CRM SALES DETAILS - INSERIMENTO E PULIZIA DATI'
