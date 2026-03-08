@@ -71,3 +71,106 @@ select *
 from silver.crm_prd_info
 
 'CRM SALES DETAILS - INSERIMENTO E PULIZIA DATI'
+
+INSERT INTO silver.crm_sales_details (
+sls_ord_num,
+sls_prd_key,
+sls_cust_id,
+sls_order_dt,
+sls_ship_dt,
+sls_due_dt,
+sls_sales,
+sls_quantity,
+sls_price
+)
+
+SELECT
+sls_ord_num,
+sls_prd_key,
+sls_cust_id,
+
+CASE 
+WHEN sls_order_dt = 0 OR LEN(sls_order_dt)<>8 THEN NULL
+ELSE CAST(CAST(sls_order_dt AS VARCHAR) AS DATE)
+END as sls_order_dt,
+
+CASE 
+WHEN sls_ship_dt = 0 OR LEN(sls_ship_dt)<>8 THEN NULL
+ELSE CAST(CAST(sls_ship_dt AS VARCHAR) AS DATE)
+END as sls_ship_dt,
+
+CASE 
+WHEN sls_due_dt = 0 OR LEN(sls_due_dt)<>8 THEN NULL
+ELSE CAST (CAST(sls_due_dt AS VARCHAR) AS DATE)
+END as sls_due_dt,
+
+CASE WHEN sls_sales IS NULL OR sls_sales <= 0 OR sls_sales <> ABS(sls_price) * sls_quantity THEN ABS (sls_price) * sls_quantity
+	 ELSE sls_sales
+END AS sls_sales,
+sls_quantity,
+
+CASE WHEN sls_price IS NULL OR sls_price <= 0 THEN ABS(sls_sales) / NULLIF (sls_quantity,0)
+	 ELSE sls_price
+END AS sls_price
+
+FROM bronze.crm_sales_details
+
+
+'CRM ERP CUST AZ12 - INSERIMENTO E PULIZIA DATI'
+
+INSERT INTO silver.erp_cust_az12 (
+cid,
+bdate,
+gen
+)
+
+SELECT 
+CASE WHEN cid LIKE 'NAS%' THEN SUBSTRING (cid,4, LEN(cid))
+	 ELSE cid
+END cid,
+
+CASE WHEN bdate > GETDATE() THEN NULL
+	 ELSE bdate
+END AS bdate,
+
+CASE WHEN UPPER(TRIM(gen)) IN ( 'F', 'FEMALE') THEN 'Female'
+	 WHEN UPPER(TRIM(gen)) IN ( 'M', 'MALE') THEN 'Male'
+	 ELSE 'N/A'
+END AS gen
+
+FROM bronze.erp_cust_az12
+
+	
+'CRM ERP LOC A101 - INSERIMENTO E PULIZIA DATI'
+
+INSERT INTO silver.erp_loc_a101(
+cid,
+cntry
+)
+
+SELECT 
+REPLACE (cid, '-','') cid,
+CASE WHEN TRIM(UPPER(cntry)) = 'DE' THEN 'Germany'
+	 WHEN TRIM(UPPER(cntry)) IN ('US' , 'USA') THEN 'United States'
+	 WHEN TRIM(UPPER(cntry)) = '' OR cntry IS NULL THEN 'N/A'
+	 ELSE TRIM(cntry)
+END AS cntry
+
+FROM bronze.erp_loc_a101
+
+
+'CRM ERP PX CAT G1V2 - INSERIMENTO E PULIZIA DATI'
+
+INSERT INTO silver.erp_px_cat_g1v2(
+id,
+cat,
+subcat,
+maintenance)
+
+SELECT
+id,
+cat,
+subcat,
+maintenance
+
+FROM bronze.erp_px_cat_g1v2
