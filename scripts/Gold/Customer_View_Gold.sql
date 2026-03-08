@@ -29,8 +29,4 @@ ON		ci.cst_key = ca.cid
 LEFT JOIN silver.erp_loc_a101 la
 ON		ci.cst_key = la.cid
 
--- Questa query prende i dati da:
---   * 
---   * 
---   * 
--- Successivamente li aggrega e crea una una vista della tabella gold, qui non ci sono batch, ma solo aggregazioni e data integration dalle silver:
+
