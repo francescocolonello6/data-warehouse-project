@@ -1,5 +1,7 @@
-
-
+-- Questa query prende i dati da:
+--   * [silver].[crm_prd_info]
+--   * [silver].[erp_px_cat_g1v2]
+-- Successivamente li aggrega e crea una una vista della tabella gold, qui non ci sono batch, ma solo aggregazioni e data integration dalle silver:
 
 
 CREATE VIEW gold.dim_products AS
