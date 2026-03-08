@@ -1,6 +1,6 @@
-SCOPO: Questa query serve a trasportare i dati dalla fonte fino alle nostre tabelle, si dichiara il percorso del file  e le istruzioni per prenderne il contenuto, come la prima riga da selezionare e il delimitatore.
+'SCOPO: Questa query serve a trasportare i dati dalla fonte fino alle nostre tabelle, si dichiara il percorso del file  e le istruzioni per prenderne il contenuto, come la prima riga da selezionare e il delimitatore.
    Successivamente si utilizza la funzione print per specificare cosa si sta facendo e impostando messaggi di errore (utile per debugging). Infine aggiungono i tempi di processazione per ogni tabella insieme al tempo totale.
-  Infine, con questa query, si crea anche una sp.
+  Infine, con questa query, si crea anche una stored procdeure'
 
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
