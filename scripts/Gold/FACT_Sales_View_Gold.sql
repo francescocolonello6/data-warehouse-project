@@ -1,5 +1,5 @@
-
-
+-- Questa query creà una visual per la fact table. Per crearla sono stati fatti dei Join con le due DIM tables per poter aggiungere la surrogate KEY.
+-- In questa maniera sarà possibile collegarle fra loro.
 
 CREATE VIEW gold.fact_sales AS
 SELECT
